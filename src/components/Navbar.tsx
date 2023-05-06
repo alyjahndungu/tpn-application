@@ -2,19 +2,19 @@ import React, { useState } from "react";
 import Link from "next/link";
 
 const navItems = [
-  { title: "Profile", url: "/profile" },
-  { title: "Change Profile", url: "/profile" },
+  { title: "Edit Profile", url: "/main/edit-profile" },
+  { title: "Change Password", url: "/main/change-password" },
 ];
 
 const Navbar = () => {
   const [navbar, setNavbar] = useState(false);
   return (
-    <nav className="w-full  border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800 shadow">
+    <nav className="w-full  border-gray-200 px-4 bg-gray-800 lg:px-6 py-2.5 dark:bg-gray-800 shadow">
       <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
         <div>
           <div className="flex items-center justify-between py-3 md:py-5 md:block">
             <Link href="/" className="flex items-center">
-              <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
+              <span className="self-center text-2xl font-semibold whitespace-nowrap text-white dark:text-white">
                 T P N
               </span>
             </Link>

@@ -1,12 +1,11 @@
 import axios from "axios";
 import { accessToken, app } from "./config";
-import { headers } from "next/dist/client/components/headers";
 
 export const get = async (urlSuffix: string) => {
   const res = await fetch(app.endpoint + urlSuffix, {
     method: "GET",
     headers: {
-      Authorization: accessToken(),
+      "x-access-token": accessToken(),
     },
   });
 
@@ -42,7 +41,7 @@ export const post = async (
     url: app.endpoint + urlSuffix,
     data: postData,
     headers: {
-      Authorization: accessToken(),
+      "x-access-token": accessToken(),
     },
   });
 

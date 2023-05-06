@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { openPost } from "@/utils/api";
-import { login } from "@/utils/config";
+import { getUserDetails, login } from "@/utils/config";
 import { accessToken } from "../utils/config";
 import { log } from "console";
 
@@ -26,6 +26,7 @@ const SignIn = () => {
           const token = response.accessToken;
           const userId = response._id;
           await login({ token, userId });
+          await getUserDetails({userId});
         }
       })
       .catch((err) => {
@@ -39,7 +40,7 @@ const SignIn = () => {
       <div className="container mx-auto">
         <div className="max-w-md mx-auto my-10">
           <div className="text-center">
-            <h1 className="text-3xl font-bold tracking-wider text-white-800 mb-4 capitalize text-white-300">
+            <h1 className="text-3xl font-bold tracking-wider text-white mb-4 capitalize text-white-300">
               Welcome Back
             </h1>
             <p className="text-gray-500 dark:text-gray-400">

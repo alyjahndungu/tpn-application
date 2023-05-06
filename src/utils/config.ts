@@ -1,13 +1,35 @@
 import Router from "next/router";
 import cookie from "js-cookie";
+import { get } from "./api";
 export const app = {
   endpoint: "http://localhost:8088/api",
 };
 
-export const login = ({ token, userId }: any) => {
+export const login = async ({ token, userId }: any) => {
+  cookie.remove("token");
   cookie.set("token", token, { expires: 7 });
   cookie.set("user_id", userId);
-  // Router.push("/home");
+};
+
+export const getUserDetails = async ({userId} : any) => {
+  await get(`/users/${userId}`)
+    .then((response) => {
+      {
+        if (response.role === "ADMIN") {
+          Router.push("/admin/dashboard");
+        }
+
+        if (response.role === "USER") {
+          Router.push("/main/dashboard");
+        }
+        console.log(response);
+      }
+    })
+    .catch((err) => {
+      {
+        console.log(err);
+      }
+    });
 };
 
 export const accessToken = () => {
@@ -44,7 +66,7 @@ export const logout = () => {
 export function loginRequired() {
   if (typeof window !== "undefined") {
     if (cookie.get("token") == null || cookie.get("token") === "null") {
-      Router.push("/signin");
+      Router.push("/sign-in");
     }
   }
 }

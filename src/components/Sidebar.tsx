@@ -101,7 +101,7 @@ function MenuItemComponent({ menu }: { menu: MenuItem }) {
   );
 }
 
-function AdminSidebar() {
+function Sidebar() {
   return (
     <aside
       id="containerSidebar"
@@ -120,4 +120,4 @@ function AdminSidebar() {
   );
 }
 
-export default AdminSidebar;
+export default Sidebar;
