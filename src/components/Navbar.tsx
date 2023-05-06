@@ -2,11 +2,8 @@ import React, { useState } from "react";
 import Link from "next/link";
 
 const navItems = [
-  { title: "Dashboard", url: "/" },
-  { title: "Invoices", url: "/" },
-  { title: "Taxation", url: "/" },
-  { title: "Users", url: "/users" },
   { title: "Profile", url: "/profile" },
+  { title: "Change Profile", url: "/profile" },
 ];
 
 const Navbar = () => {
@@ -18,7 +15,7 @@ const Navbar = () => {
           <div className="flex items-center justify-between py-3 md:py-5 md:block">
             <Link href="/" className="flex items-center">
               <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
-                The Pathology Network
+                T P N
               </span>
             </Link>
             <div className="md:hidden">

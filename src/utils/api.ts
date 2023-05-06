@@ -1,5 +1,6 @@
 import axios from "axios";
 import { accessToken, app } from "./config";
+import { headers } from "next/dist/client/components/headers";
 
 export const get = async (urlSuffix: string) => {
   const res = await fetch(app.endpoint + urlSuffix, {
@@ -48,16 +49,13 @@ export const post = async (
   return res.data;
 };
 
-export const patch = async (
-  urlSuffix: string,
-  postData: Record<string, any>
-) => {
+export const patch = async (urlSuffix: string, postData: any) => {
   const res = await axios({
     method: "patch",
     url: app.endpoint + urlSuffix,
     data: postData,
     headers: {
-      Authorization: accessToken(),
+      "x-access-token": accessToken(),
     },
   });
 

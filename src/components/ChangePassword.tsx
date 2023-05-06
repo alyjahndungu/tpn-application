@@ -2,15 +2,13 @@ import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { openPost } from "@/utils/api";
 import { login } from "@/utils/config";
-import { accessToken } from "../utils/config";
-import { log } from "console";
 
 type FormValues = {
   email: string;
   password: string;
 };
 
-const SignIn = () => {
+const ChangePassword = () => {
   const {
     register,
     handleSubmit,
@@ -21,10 +19,8 @@ const SignIn = () => {
     await openPost("/login", data)
       .then(async (response) => {
         {
-          console.log(response);
-
           const token = response.accessToken;
-          const userId = response._id;
+          const userId = response.userId;
           await login({ token, userId });
         }
       })
@@ -124,4 +120,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default ChangePassword;
