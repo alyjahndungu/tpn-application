@@ -11,7 +11,7 @@ export const login = async ({ token, userId }: any) => {
   cookie.set("user_id", userId);
 };
 
-export const getUserDetails = async ({userId} : any) => {
+export const getUserDetails = async ({ userId }: any) => {
   await get(`/users/${userId}`)
     .then((response) => {
       {
@@ -35,7 +35,7 @@ export const getUserDetails = async ({userId} : any) => {
 export const accessToken = () => {
   if (typeof window !== "undefined") {
     if (cookie.get("token") == null || cookie.get("token") === "null") {
-      Router.push("/sign-in");
+      Router.push("/auth/sign-in");
     } else {
       const token = cookie.get("token");
       return token;
@@ -59,14 +59,14 @@ export const logout = () => {
   if (typeof window !== "undefined") {
     cookie.get("token", null);
     cookie.remove("token");
-    Router.push("/sign-in");
+    Router.push("/auth/sign-in");
   }
 };
 
 export function loginRequired() {
   if (typeof window !== "undefined") {
     if (cookie.get("token") == null || cookie.get("token") === "null") {
-      Router.push("/sign-in");
+      Router.push("/auth/sign-in");
     }
   }
 }

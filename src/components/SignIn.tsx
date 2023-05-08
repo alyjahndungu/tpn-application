@@ -2,8 +2,7 @@ import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { openPost } from "@/utils/api";
 import { getUserDetails, login } from "@/utils/config";
-import { accessToken } from "../utils/config";
-import { log } from "console";
+import Link from "next/link";
 
 type FormValues = {
   email: string;
@@ -109,12 +108,12 @@ const SignIn = () => {
               </div>
               <p className="text-sm text-center text-gray-400">
                 Don&#x27;t have an account yet?{" "}
-                <a
+                <Link
                   href="/auth/sign-up"
                   className="text-indigo-400 focus:outline-none focus:underline focus:text-indigo-500 dark:focus:border-indigo-800"
                 >
                   Sign up
-                </a>
+                </Link>
                 .
               </p>
             </form>

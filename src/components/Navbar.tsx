@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import { logout } from "@/utils/config";
 
 const navItems = [
   { title: "Edit Profile", url: "/main/edit-profile" },
@@ -68,6 +69,12 @@ const Navbar = () => {
                   <Link href={navItem.url}>{navItem.title}</Link>
                 </li>
               ))}
+              <button
+                onClick={logout}
+                className="px-3 py-2 text-white bg-indigo-500 rounded-md focus:bg-indigo-600 focus:outline-none"
+              >
+                Logout
+              </button>
             </ul>
           </div>
         </div>

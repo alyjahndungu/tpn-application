@@ -2,6 +2,8 @@
 import React, { useRef } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { openPost } from "@/utils/api";
+import Link from "next/link";
+import Router from "next/router";
 
 type FormValues = {
   firstName: string;
@@ -35,6 +37,9 @@ const SignUp = () => {
       .then((response) => {
         {
           console.log(response);
+          if (response.statusCode === 201) {
+            Router.push("/auth/sign-in");
+          }
         }
       })
       .catch((err) => {
@@ -206,12 +211,12 @@ const SignUp = () => {
               </div>
               <p className="text-sm text-center text-gray-400">
                 Have an account?{" "}
-                <a
+                <Link
                   href="/auth/sign-in"
                   className="text-indigo-400 focus:outline-none focus:underline focus:text-indigo-500 dark:focus:border-indigo-800"
                 >
                   Sign in
-                </a>
+                </Link>
                 .
               </p>
             </form>
