@@ -1,9 +1,10 @@
 /* eslint-disable react/no-unescaped-entities */
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { openPost } from "@/utils/api";
 import Link from "next/link";
 import Router from "next/router";
+import Message from "./Message";
 
 type FormValues = {
   firstName: string;
@@ -15,6 +16,7 @@ type FormValues = {
 };
 
 const SignUp = () => {
+  const [message, setMessage] = useState("");
   const {
     register,
     handleSubmit,
@@ -45,6 +47,7 @@ const SignUp = () => {
       .catch((err) => {
         {
           console.log(err);
+          setMessage(err.response.message);
         }
       });
   };
@@ -71,6 +74,7 @@ const SignUp = () => {
               onSubmit={handleSubmit(onSubmit)}
               className="grid grid-cols-1 gap-6 mt-8 md:grid-cols-2"
             >
+              {message ? <Message msg={message} /> : null}
               <div>
                 <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">
                   First Name

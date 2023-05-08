@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { openPost } from "@/utils/api";
 import { getUserDetails, login } from "@/utils/config";
 import Link from "next/link";
+import Message from "./Message";
 
 type FormValues = {
   email: string;
@@ -10,6 +11,8 @@ type FormValues = {
 };
 
 const SignIn = () => {
+  const [message, setMessage] = useState("");
+
   const {
     register,
     handleSubmit,
@@ -22,15 +25,25 @@ const SignIn = () => {
         {
           console.log(response);
 
-          const token = response.accessToken;
-          const userId = response._id;
-          await login({ token, userId });
-          await getUserDetails({userId});
+          if (response.statusCode === 200) {
+            const token = response.accessToken;
+            const userId = response._id;
+            await login({ token, userId });
+            await getUserDetails({ userId });
+          }
+
+          if (response.statusCode === 400) {
+            setMessage(response.message);
+          }
+
+          if (response.statusCode === 401) {
+            setMessage(response.message);
+          }
         }
       })
-      .catch((err) => {
+      .catch((error) => {
         {
-          console.log(err);
+          console.log(error);
         }
       });
   };
@@ -48,6 +61,8 @@ const SignIn = () => {
           </div>
           <div className="mb-7">
             <form onSubmit={handleSubmit(onSubmit)}>
+              {message ? <Message msg={message} /> : null}
+
               <div className="mb-4">
                 <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">
                   Email address
